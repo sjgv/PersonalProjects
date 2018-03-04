@@ -1,0 +1,16 @@
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\obj\Debug\BowlingAppTests.csprojResolveAssemblyReference.cache
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\obj\Debug\BowlingAppTests.csproj.CoreCompileInputs.cache
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\BowlingAppTests.dll
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\BowlingAppTests.pdb
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\BowlingApp.exe
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\BowlingApp.pdb
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\BowlingApp.exe.config
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\obj\Debug\BowlingAppTests.dll
+C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingAppTests\obj\Debug\BowlingAppTests.pdb
