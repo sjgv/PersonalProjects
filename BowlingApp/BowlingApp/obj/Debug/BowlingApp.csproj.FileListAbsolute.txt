@@ -5,3 +5,10 @@ C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingApp\obj\Debug\
 C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingApp\obj\Debug\BowlingApp.csproj.CoreCompileInputs.cache
 C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingApp\obj\Debug\BowlingApp.exe
 C:\Users\everyDay\Source\Repos\PersonalProjects\BowlingApp\BowlingApp\obj\Debug\BowlingApp.pdb
+C:\Users\everyDay\Source\Repos\PersonalProjects2\BowlingApp\BowlingApp\bin\Debug\BowlingApp.exe.config
+C:\Users\everyDay\Source\Repos\PersonalProjects2\BowlingApp\BowlingApp\bin\Debug\BowlingApp.exe
+C:\Users\everyDay\Source\Repos\PersonalProjects2\BowlingApp\BowlingApp\bin\Debug\BowlingApp.pdb
+C:\Users\everyDay\Source\Repos\PersonalProjects2\BowlingApp\BowlingApp\obj\Debug\BowlingApp.csprojResolveAssemblyReference.cache
+C:\Users\everyDay\Source\Repos\PersonalProjects2\BowlingApp\BowlingApp\obj\Debug\BowlingApp.csproj.CoreCompileInputs.cache
+C:\Users\everyDay\Source\Repos\PersonalProjects2\BowlingApp\BowlingApp\obj\Debug\BowlingApp.exe
+C:\Users\everyDay\Source\Repos\PersonalProjects2\BowlingApp\BowlingApp\obj\Debug\BowlingApp.pdb

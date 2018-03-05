@@ -71,6 +71,7 @@ namespace BowlingApp
         {
             int frameScore = 0;
             int totalScore = 0;
+            int counter = 1;
             for(int i = 0; i < arr.Length - 2; i+=2)
             {
                 //If element is a 10 and less than pos 17
@@ -98,7 +99,8 @@ namespace BowlingApp
                     frameScore = arr[i] + arr[i + 1];
                 }
                 totalScore += frameScore;
-                Console.Write("Frame # " + (i+1)+" Bowled:" + arr[i] + " " + arr[i + 1] + "\n");
+                Console.Write("Frame # " + counter+" Bowled:" + arr[i] + " " + arr[i + 1] + "\n");
+                counter++;
             }
             return totalScore;
         }
