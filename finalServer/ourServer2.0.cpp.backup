@@ -1,0 +1,187 @@
+#include <stdio.h>
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <netinet/in.h>
+#include <string.h>
+#include <iostream>
+#include <unistd.h> //For read() and write() funcs
+#include <pthread.h> //For POSIX multithreading
+#include <signal.h> //For ignoring sig pipes
+#include"commInterface.h"
+#define PORT 2112
+#define MAX_CLIENTS 1000
+
+using namespace std;
+static unsigned int clientCount = 0;
+static int uid = 0;
+
+/*Client structure*/
+typedef struct{
+  struct sockaddr_in addr;
+  int connfd;
+  int uid;
+  char bufferOut[1024];
+  char bufferIn[1024];
+}clientStruct;
+
+
+/* Arguments struct*/
+typedef struct{
+  int listenfd, connfd, currentUid;
+  sockaddr_in * clientAddress;
+  clientStruct * clients;
+  commInterface * interfaces; 
+}argsStruct;
+
+/* Arguments for handlingClient */
+typedef struct{
+  clientStruct * clients;
+  commInterface * interfaces;
+  int uid;
+}handlingClientArgs;
+
+void addClient(clientStruct * client, clientStruct * clients, commInterface * interfaces)
+{
+  commInterface interface;
+  clients[client->uid] = *client;
+  cout<<"Client CONNFD: "<<client->connfd<<endl;
+  cout<<"CONNFD from array: "<<clients[client->uid].connfd<<endl;
+  interfaces[client->uid] = interface;
+  return;
+      // }
+      // }
+}
+  
+void errorHelper(string msg)
+{
+  cout<<msg<<endl;
+  exit(1);
+}
+
+void * handleClient(void * arguments)
+{
+  cout << "in handle client!" << endl;
+  clientCount++;
+  handlingClientArgs * argumentz = (handlingClientArgs *) arguments;
+  int uid = argumentz->uid;
+  clientStruct client = argumentz->clients[uid];
+  int rlen;
+  cout<<"CONNFD in handleC = "<<client.connfd<<endl;
+  while((rlen = read(client.connfd, client.bufferIn, sizeof(client.bufferIn)-1)) > 0)
+ {
+   cout<<"In handle loop"<<endl;
+   client.bufferIn[rlen] = '\0';
+   client.bufferOut[0] = '\0';
+   
+
+   /*Ignore empty buffer */
+   if(strlen(client.bufferIn) == 0)
+     continue;
+   cout<<"Gets HERE"<<endl;
+
+   cout<<client.bufferIn<<endl;
+
+    sleep(1);
+  }
+}
+
+void * listenForClients(void * arguments)
+{
+  cout<<"In ListenForClients"<<endl;
+  argsStruct * argumentz = (argsStruct *) arguments; 
+  int listenfd = argumentz->listenfd;
+  int connfd = argumentz->connfd;
+  sockaddr_in  clientAddress = *argumentz->clientAddress;
+  clientStruct * clients = argumentz->clients;
+  commInterface * interfaces = argumentz->interfaces;
+  
+
+  cout<<"Before start message"<<endl;
+  /* Listen */
+  if(listen(listenfd, 5) < 0)
+    errorHelper("ERROR: listening failed");
+
+  /* Accept clients */
+  while(1)
+    {
+      cout<<"In Listening Loop"<<endl;
+      socklen_t clientLength = sizeof(clientAddress);
+      connfd = accept(listenfd, (struct sockaddr *)&clientAddress, &clientLength);
+
+      /*reAssign to the clientStruct */
+      //argumentz->connfd = connfd;
+      /* Check if at capacity */
+      if((clientCount+1) == MAX_CLIENTS)
+	{
+	  printf("MAX CLIENTS REACHED\n");
+	  printf("CANNOT CONNECT");
+	  close(connfd);
+	  continue;
+	}
+
+        cout << "right after capacity check" << endl;
+      /*Client settings */
+      clientStruct * client = (clientStruct *) malloc(sizeof(clientStruct));
+      client->addr = clientAddress; 
+      client->connfd = connfd;
+      client->uid = uid;
+      //Add client to array of structs
+      addClient(client, clients,interfaces);
+      cout<<"CONNFD in listen = "<<clients[uid].connfd<<endl;
+      sleep(1);
+      //Create struct for every client
+      handlingClientArgs * clientArgs = (handlingClientArgs *)malloc(sizeof(handlingClientArgs));
+      clientArgs->clients = clients;
+      clientArgs->interfaces = interfaces;
+      clientArgs->uid = uid;
+      /*Increment the uid */
+      uid++;
+      //Spin handling client thread
+      pthread_t tid;
+      pthread_create(&tid, NULL, &handleClient,clientArgs);
+    }
+
+}
+
+
+int main(int argc, char * argv[])
+{
+  /*Clients Data Structure */ 
+  clientStruct clients[MAX_CLIENTS];
+  commInterface interfaces[MAX_CLIENTS];
+  
+  int listenfd = 0, connfd = 0;
+  struct sockaddr_in serverAddress, clientAddress;
+  //argsStruct arguments; 
+  pthread_t tid;
+  
+  /* Socket settings */
+  listenfd = socket(AF_INET, SOCK_STREAM, 0);
+  serverAddress.sin_family = AF_INET;
+  serverAddress.sin_addr.s_addr = INADDR_ANY;
+  serverAddress.sin_port = htons(PORT);
+  /*Ignore pipe signals */
+  signal(SIGPIPE, SIG_IGN);
+
+  /*Bind */
+  if(bind(listenfd, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0)
+    {
+      errorHelper("Error: binding socket failed");
+    }
+  argsStruct * arguments = (argsStruct *)malloc(sizeof(argsStruct));
+  arguments->listenfd = listenfd;
+  arguments->connfd = connfd;
+  arguments->clientAddress = &clientAddress;
+  arguments->clients = clients;
+  arguments->interfaces = interfaces;
+
+  cout<<"Before threading works"<<endl;
+  //Call method that we're making now here
+  pthread_create(&tid, NULL, &listenForClients, arguments);
+  while(1)
+    {
+      sleep(1);
+    }
+
+  //return 0;
+}
